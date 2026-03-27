@@ -39,7 +39,7 @@ export default function Home() {
                         <p className="text-neutral-400 text-lg">based in dallas, tx</p>
                     </div>
                     <p className="text-neutral-300 text-lg">
-                        i&apos;m a {ageYear} y/o undergrad student at virginia tech majoring in cs + cmda (just a complicated name for data analytics). currently, i am a developer at vt hacks. i love building things and solving problems. if i'm not coding, i'm probably watching movies.
+                        i&apos;m a {ageYear} y/o undergrad student at virginia tech majoring in cs + cmda (just a complicated name for data analytics). currently, i am helping organize vthacks as a software developer.
                     </p>
                 </motion.section>
             ) : (
@@ -51,7 +51,7 @@ export default function Home() {
                         <p className="text-neutral-400 text-lg">based in dallas, tx</p>
                     </div>
                     <p className="text-neutral-300 text-lg">
-                        i&apos;m a {ageYear} y/o undergrad student at virginia tech majoring in cs + cmda (just a complicated name for data analytics). currently, i am a developer at vt hacks. i love building things and solving problems. if i'm not coding, i'm probably watching movies.
+                    i&apos;m a {ageYear} y/o undergrad student at virginia tech majoring in cs + cmda (just a complicated name for data analytics). currently, i am helping organize vthacks as a software developer.
                     </p>
                 </section>
             )}
