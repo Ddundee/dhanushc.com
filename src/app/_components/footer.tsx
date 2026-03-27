@@ -9,9 +9,9 @@ export default function Footer({ className }: { className: string }) {
 
     return (
         <motion.footer
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            // viewport={{ once: true, margin: "-10% 0px" }}
+            initial={{ opacity: 0, filter: "blur(12px)", scale: 0.97 }}
+            whileInView={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
             className={cn("mt-9 flex w-full max-w-screen-md flex-row gap-4 justify-between", className)}>
             <div>

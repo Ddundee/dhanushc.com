@@ -25,8 +25,8 @@ export default function Home() {
         <div className="space-y-12">
             {shouldAnimate ? (
                 <motion.section
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, filter: "blur(12px)", scale: 0.97 }}
+                    whileInView={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
                     viewport={{ once: true, margin: "-10% 0px" }}
                     transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
                     className="space-y-9">
