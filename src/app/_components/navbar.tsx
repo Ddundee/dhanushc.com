@@ -53,9 +53,8 @@ export default function Navbar() {
 
     return (
         <motion.nav
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10% 0px" }}
+            initial={{ opacity: 0, filter: "blur(12px)", scale: 0.97 }}
+            animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="w-full max-w-screen-md gap-3 flex">
             {pages.map(page => {
