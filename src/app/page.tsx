@@ -36,7 +36,7 @@ export default function Home() {
                         <h1 className="min-h-12 w-full text-5xl font-bold text-neutral-100">
                             dhanush chilakala
                         </h1>
-                        <p className="text-neutral-400 text-lg">based in dallas, tx</p>
+                        <p className="text-neutral-400 text-lg">based in northlake, tx</p>
                     </div>
                     <p className="text-neutral-300 text-lg">
                         i&apos;m a {ageYear} y/o undergrad student at virginia tech majoring in cs + cmda (just a complicated name for data analytics). currently, i am helping organize vthacks as a software developer.
@@ -48,7 +48,7 @@ export default function Home() {
                         <h1 className="min-h-12 w-full text-5xl font-bold text-neutral-100">
                             dhanush chilakala
                         </h1>
-                        <p className="text-neutral-400 text-lg">based in dallas, tx</p>
+                        <p className="text-neutral-400 text-lg">based in northlake, tx</p>
                     </div>
                     <p className="text-neutral-300 text-lg">
                     i&apos;m a {ageYear} y/o undergrad student at virginia tech majoring in cs + cmda (just a complicated name for data analytics). currently, i am helping organize vthacks as a software developer.
