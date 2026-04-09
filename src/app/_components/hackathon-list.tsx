@@ -3,7 +3,11 @@ import HACKATHONS from "../../data/hackathons"
 
 export default function HackathonList({condensed}: {condensed?: boolean}) {
 
-    const hackathonList = condensed ? HACKATHONS.filter((hackathon) => hackathon.award).slice(0, 3) : HACKATHONS;
+    const upcoming = HACKATHONS.filter((h) => h.upcoming)
+    const awardedRest = HACKATHONS.filter((h) => h.award && !h.upcoming)
+    const hackathonList = condensed
+        ? [...awardedRest].slice(0, 3)
+        : HACKATHONS
     return (
         <div className="space-y-4">
             {hackathonList.map((hackathon) => (
@@ -24,6 +28,11 @@ export default function HackathonList({condensed}: {condensed?: boolean}) {
                                     {hackathon.name}
                                 </p>
                             )}
+                            {hackathon.upcoming && (
+                                <span className="text-sm text-neutral-500 whitespace-nowrap">
+                                    soon
+                                </span>
+                            )}
                             {hackathon.award && (
                                 <span className="text-sm text-orange-600/80 whitespace-nowrap">
                                     {hackathon.award}
@@ -34,9 +43,9 @@ export default function HackathonList({condensed}: {condensed?: boolean}) {
                             {hackathon.date}
                         </span>
                     </div>
-                    <p className="text-neutral-500 text-sm">
+                    {!hackathon.upcoming && <p className="text-neutral-500 text-sm">
                         {hackathon.project} — {hackathon.description}
-                    </p>
+                    </p>}
                 </div>
             ))}
         </div>

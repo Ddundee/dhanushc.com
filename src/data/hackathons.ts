@@ -1,13 +1,21 @@
 export type Hackathon = {
     name: string
     project: string
-    description: string
+    description?: string
     date: string
     award?: string
     link?: string
+    upcoming?: boolean
 }
 
 const HACKATHONS: Hackathon[] = [
+    {
+        name: "bitcamp (umd)",
+        project: "project tbd",
+        date: "apr 2026",
+        upcoming: true,
+        link: "https://bit.camp/",
+    },
     {
         name: "hackviolet",
         project: "plan my trip",
@@ -42,7 +50,7 @@ const HACKATHONS: Hackathon[] = [
         project: "carbon track",
         description: "web application that helps users calculate their personal carbon footprint",
         date: "sep 2023",
-        award: "division winners",
+        award: "1st in division",
         link: "https://devpost.com/software/carbon-track-atu169",
     },
 ]
