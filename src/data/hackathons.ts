@@ -10,13 +10,6 @@ export type Hackathon = {
 
 const HACKATHONS: Hackathon[] = [
     {
-        name: "bitcamp (umd)",
-        project: "project tbd",
-        date: "apr 2026",
-        upcoming: true,
-        link: "https://bit.camp/",
-    },
-    {
         name: "hackviolet",
         project: "plan my trip",
         description: "a collaborative travel budgeting app that lets users track and split expenses across multiple currencies in real time",
