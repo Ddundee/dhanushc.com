@@ -18,7 +18,7 @@ export default function Footer({ className }: { className: string }) {
                 <a
                     className="select-none rounded-sm px-2 py-1 text-neutral-400 no-underline duration-100 hover:bg-orange-300/5 hover:text-orange-600"
                     target="_blank"
-                    href="mailto:dhanushc@vt.edu"
+                    href="mailto:dhanush@dhanushc.com"
                     rel="noreferrer"
                 >
                     email
