@@ -5,7 +5,7 @@ import React, { useEffect } from 'react'
 export default function Page() {
 
     useEffect(() => {
-        window.open(RESUME_LINK, "_self");
+        window.location.href = RESUME_LINK;
     }, [])
 
     return (
