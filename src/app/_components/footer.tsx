@@ -1,6 +1,5 @@
 "use client"
 import { cn } from "@/lib/utils";
-import RESUME_LINK from "@/util/resumeLink";
 import { useEffect, useState } from "react";
 import { motion } from 'motion/react'
 import Views from "./views";
@@ -38,14 +37,6 @@ export default function Footer({ className }: { className: string }) {
                     rel="noreferrer"
                 >
                     linkedin
-                </a>
-                <a
-                    className="select-none rounded-sm px-2 py-1 text-neutral-400 no-underline duration-100 hover:bg-orange-300/5 hover:text-orange-600"
-                    target="_blank"
-                    href={RESUME_LINK}
-                    rel="noreferrer"
-                >
-                    resume
                 </a>
             </div>
             <Views />
