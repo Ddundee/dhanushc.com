@@ -16,3 +16,7 @@ binding = "ASSETS"
 # Optional, but commonly needed for Next.js apps
 [vars]
 NODE_ENV = "production"
+
+[observability.logs]
+enabled = false
+invocation_logs = true
