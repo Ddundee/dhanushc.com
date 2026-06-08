@@ -4,7 +4,13 @@ import { useEffect, useState } from "react";
 import { motion } from 'motion/react'
 import Views from "./views";
 
-export default function Footer({ className }: { className: string }) {
+export default function Footer({
+    className,
+    countOnVisit = true,
+}: {
+    className: string
+    countOnVisit?: boolean
+}) {
 
     return (
         <motion.footer
@@ -39,7 +45,7 @@ export default function Footer({ className }: { className: string }) {
                     linkedin
                 </a>
             </div>
-            <Views />
+            <Views countOnVisit={countOnVisit} />
         </motion.footer>
     )
 }

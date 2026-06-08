@@ -6,7 +6,7 @@ import { Caveat } from "next/font/google"
 import CMDAToolTip from "@/components/cmda-tooltip"
 import Link from "next/link"
 import BLOGS from "./blogs"
-import BlogList from "../_components/blog-list"
+import BlogList from "../../_components/blog-list"
 import { motion } from "motion/react"
 import MotionContext from "@/context/motion-context"
 

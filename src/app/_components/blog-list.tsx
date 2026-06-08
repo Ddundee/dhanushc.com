@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import BLOGS from '../blog/blogs'
+import BLOGS from '../(home)/blog/blogs'
 import Link from 'next/link'
 import {
     Pagination,

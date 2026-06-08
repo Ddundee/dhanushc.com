@@ -5,7 +5,7 @@ import PageLayout from "@/app/_components/page-layout"
 import { Caveat } from "next/font/google"
 import CMDAToolTip from "@/components/cmda-tooltip"
 import Link from "next/link"
-import HackathonList from "../_components/hackathon-list"
+import HackathonList from "../../_components/hackathon-list"
 import { motion } from "motion/react"
 import MotionContext from "@/context/motion-context"
 

@@ -1,8 +1,8 @@
 'use client'
 import React, { useContext, useEffect } from "react"
 import { ScrambleText } from "@/components/scramble-text"
-import BlogList from "./_components/blog-list"
-import HackathonList from "./_components/hackathon-list"
+import BlogList from "../_components/blog-list"
+import HackathonList from "../_components/hackathon-list"
 import { motion } from "motion/react"
 import Link from "next/link"
 import MotionContext from "@/context/motion-context"

@@ -4,9 +4,10 @@ import Navbar from "./navbar"
 
 type Props = {
     children: ReactNode[] | ReactNode
+    countOnVisit?: boolean
 }
 
-export default function PageLayout({ children }: Props) {
+export default function PageLayout({ children, countOnVisit = true }: Props) {
 
     return (
         <div className="relative flex min-h-screen flex-col items-center justify-between pb-14">
@@ -17,7 +18,7 @@ export default function PageLayout({ children }: Props) {
                     {children}
                 </main>
             </div>
-            <Footer className="relative z-10" />
+            <Footer className="relative z-10" countOnVisit={countOnVisit} />
         </div>
     )
 }

@@ -4,7 +4,6 @@ import "./globals.css"
 import { Toaster } from "@/components/ui/sonner"
 import RouterProgressBar from "@/components/router-progress-bar"
 import { TooltipProvider } from "@/components/ui/tooltip"
-import PageLayout from "./_components/page-layout"
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import MotionProvider from "@/context/motion-provider"
@@ -17,8 +16,8 @@ const atkinson = Atkinson_Hyperlegible({
 export const metadata: Metadata = {
     metadataBase: new URL("https://www.dhanushc.com"),
     title: {
-        default: "Dhanush Chilakala – CS & CMDA @ Virginia Tech",
-        template: "%s | Dhanush Chilakala",
+        default: "dhanush chilakala - cs & cmda @ virginia tech",
+        template: "%s | dhanush chilakala",
     },
     description:
         "Portfolio of Dhanush Chilakala, a Dallas-based CS & CMDA undergrad at Virginia Tech who loves building things, solving problems, and writing about hackathons and software.",
@@ -38,14 +37,14 @@ export const metadata: Metadata = {
     openGraph: {
         type: "website",
         url: "https://www.dhanushc.com",
-        title: "Dhanush Chilakala – CS & CMDA @ Virginia Tech",
+        title: "dhanush chilakala - cs & cmda @ virginia tech",
         description:
             "Dallas-based CS & CMDA undergrad at Virginia Tech who loves building things, solving problems, and sharing projects and hackathon experiences.",
-        siteName: "Dhanush Chilakala",
+        siteName: "dhanush chilakala",
     },
     twitter: {
         card: "summary_large_image",
-        title: "Dhanush Chilakala – CS & CMDA @ Virginia Tech",
+        title: "dhanush chilakala - cs & cmda @ virginia tech",
         description:
             "Portfolio of Dhanush Chilakala, Dallas-based undergrad and developer at VT Hacks.",
     },
@@ -78,9 +77,7 @@ export default function RootLayout({
                         className="boder-orange-600 bg-orange-300/5 text-neutral-100 backdrop-blur-md"
                     />
                     <MotionProvider>
-                        <PageLayout>
                             {children}
-                        </PageLayout>
                     </MotionProvider>
                 </TooltipProvider>
                 <Analytics />
