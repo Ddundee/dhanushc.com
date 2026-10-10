@@ -249,7 +249,12 @@ export default function Music() {
                                           src={t.image}
                                           alt={`${t.album || t.title} by ${t.artists}`}
                                           loading="lazy"
-                                          {...fadeOnLoad}
+                                          crossOrigin="anonymous"
+                                          onLoad={(e) => {
+                                              fadeOnLoad.onLoad(e)
+                                              const c = coverColor(e.currentTarget)
+                                              if (c) setColors((prev) => ({ ...prev, [t.url]: c }))
+                                          }}
                                           className={cn(
                                               "size-full object-cover grayscale duration-500 group-hover:scale-105 group-hover:grayscale-0 group-focus-visible:grayscale-0",
                                               FADE_CLASS,
@@ -268,10 +273,20 @@ export default function Music() {
                     {caption && (
                         <>
                             <p className="truncate">
-                                <span className="text-neutral-200">{caption.album || caption.title}</span>{" "}
+                                <span
+                                    className="text-neutral-200 transition-colors duration-300"
+                                    style={{ color: colors[caption.url] }}
+                                >
+                                    {caption.album || caption.title}
+                                </span>{" "}
                                 <span className="text-neutral-500">{caption.artists}</span>
                             </p>
-                            <span className="shrink-0 tabular-nums text-neutral-600">{caption.plays} plays</span>
+                            <span
+                                className="shrink-0 tabular-nums text-neutral-600 transition-colors duration-300"
+                                style={{ color: colors[caption.url] }}
+                            >
+                                {caption.plays} plays
+                            </span>
                         </>
                     )}
                 </div>
