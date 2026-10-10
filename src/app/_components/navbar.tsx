@@ -17,6 +17,10 @@ const pages = [
     {
         title: "[b]log",
         url: "/blog"
+    },
+    {
+        title: "[m]usic",
+        url: "/music"
     }
 ]
 

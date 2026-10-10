@@ -41,3 +41,5 @@ yarn-error.log*
 next-env.d.ts
 
 pnpm-workspace.yaml
+# cloudflare local secrets
+.dev.vars*
