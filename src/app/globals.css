@@ -195,3 +195,24 @@
     animation: noise 1s steps(1) infinite;
     mix-blend-mode: overlay;
 }
+
+@theme {
+    --animate-eq: eq 0.9s ease-in-out infinite;
+
+    @keyframes eq {
+        0%,
+        100% {
+            transform: scaleY(0.3);
+        }
+        50% {
+            transform: scaleY(1);
+        }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .animate-eq {
+        animation: none;
+        transform: scaleY(0.6);
+    }
+}
