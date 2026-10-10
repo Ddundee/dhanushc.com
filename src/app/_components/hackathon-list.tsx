@@ -19,7 +19,7 @@ export default function HackathonList({condensed}: {condensed?: boolean}) {
                                     href={hackathon.link}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="text-lg font-medium text-neutral-200/70 hover:text-orange-600 duration-200 truncate"
+                                    className="text-lg font-medium text-neutral-200/70 hover:text-orange-600 transition-colors duration-200 truncate"
                                 >
                                     {hackathon.name}
                                 </a>

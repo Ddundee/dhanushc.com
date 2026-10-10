@@ -27,7 +27,7 @@ export default function BlogList() {
                     <div className="flex justify-between gap-2" key={blog.url}>
                         {blog.published ? <Link
                             href={blog.url}
-                            className={`text-lg font-medium text-neutral-200/70 hover:text-orange-600 duration-200`}
+                            className={`text-lg font-medium text-neutral-200/70 hover:text-orange-600 transition-colors duration-200`}
                         >
                             {blog.title}
                         </Link> : <p

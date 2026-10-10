@@ -1,11 +1,6 @@
 import { createContext } from "react"
 
-const MotionContext = createContext<{
-    motion: boolean
-    setMotion: React.Dispatch<React.SetStateAction<boolean>>
-}>({
-    motion: true,
-    setMotion: () => { },
-})
+// true until the first client-side navigation, so only the landing page gets the full entrance
+const MotionContext = createContext<{ firstLoad: boolean }>({ firstLoad: true })
 
 export default MotionContext
