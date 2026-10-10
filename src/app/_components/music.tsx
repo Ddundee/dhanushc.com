@@ -1,11 +1,20 @@
 "use client"
 
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useState, type SyntheticEvent } from "react"
 import { AnimatePresence, motion } from "motion/react"
 import type { MusicData } from "@/lib/listenbrainz"
 import { cn } from "@/lib/utils"
+import Reveal, { EASE } from "@/components/reveal"
 
 const POLL_MS = 30_000
+
+// fade covers in once they've actually loaded instead of letting them pop in
+const fadeOnLoad = {
+    onLoad: (e: SyntheticEvent<HTMLImageElement>) => {
+        e.currentTarget.dataset.loaded = "true"
+    },
+}
+const FADE_CLASS = "opacity-0 transition-[opacity,filter,scale] data-[loaded=true]:opacity-100"
 
 function timeAgo(iso: string, now: number) {
     const s = Math.max(0, Math.floor((now - new Date(iso).getTime()) / 1000))
@@ -120,7 +129,11 @@ export default function Music() {
     const np = data?.nowPlaying
 
     if (error && !data) {
-        return <p className="text-neutral-500">the music api&apos;s taking a nap. try again in a bit.</p>
+        return (
+            <Reveal index={1}>
+                <p className="text-neutral-500">the music api&apos;s taking a nap. try again in a bit.</p>
+            </Reveal>
+        )
     }
 
     const last = data?.lastPlayed
@@ -130,7 +143,7 @@ export default function Music() {
     return (
         <div className="space-y-12">
             {/* now playing / last played */}
-            <section className="relative">
+            <Reveal as="section" index={1} className="relative">
                 <AnimatePresence>
                     {featured?.image && (
                         <motion.img
@@ -152,16 +165,28 @@ export default function Music() {
                         <a href={featured.url} target="_blank" rel="noreferrer" className="shrink-0">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
+                                key={featured.image}
                                 src={featured.image}
                                 alt={featured.album}
-                                className="size-24 rounded-sm object-cover shadow-lg shadow-black/40 sm:size-28"
+                                {...fadeOnLoad}
+                                className={cn(
+                                    "size-24 rounded-sm object-cover shadow-lg shadow-black/40 duration-500 sm:size-28",
+                                    FADE_CLASS
+                                )}
                             />
                         </a>
                     ) : (
                         <div className="size-24 shrink-0 animate-pulse rounded-sm bg-neutral-900 sm:size-28" />
                     )}
 
-                    <div className="min-w-0 flex-1 space-y-1">
+                    <motion.div
+                        // re-keyed per song so the text crossfades when the track changes
+                        key={featured ? `${featured.title}|${featured.artists}` : "loading"}
+                        initial={{ opacity: 0, y: 4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.45, ease: EASE }}
+                        className="min-w-0 flex-1 space-y-1"
+                    >
                         <p className="flex items-center gap-2 text-neutral-500">
                             {np ? (
                                 <>
@@ -180,7 +205,7 @@ export default function Music() {
                                     href={featured.url}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="block truncate text-lg text-neutral-100 underline decoration-neutral-600 underline-offset-4 duration-200 hover:text-orange-600 hover:decoration-orange-600"
+                                    className="block truncate text-lg text-neutral-100 underline decoration-neutral-600 underline-offset-4 transition-colors duration-200 hover:text-orange-600 hover:decoration-orange-600"
                                 >
                                     {featured.title}
                                 </a>
@@ -190,12 +215,12 @@ export default function Music() {
                                 </p>
                             </>
                         )}
-                    </div>
+                    </motion.div>
                 </div>
-            </section>
+            </Reveal>
 
             {/* most played albums, last 30 days */}
-            <section className="space-y-3">
+            <Reveal as="section" index={2} className="space-y-3">
                 <div className="flex items-baseline justify-between">
                     <h2 className="text-2xl font-semibold text-neutral-100">recently played</h2>
                     <span className="text-sm text-neutral-600">most played, last 30 days</span>
@@ -206,13 +231,16 @@ export default function Music() {
                 >
                     {data
                         ? data.albums.map((t, i) => (
-                              <a
+                              <motion.a
                                   key={t.url}
                                   href={t.url}
                                   target="_blank"
                                   rel="noreferrer"
                                   onMouseEnter={() => setHovered(i)}
                                   onFocus={() => setHovered(i)}
+                                  initial={{ opacity: 0, scale: 0.96 }}
+                                  animate={{ opacity: 1, scale: 1 }}
+                                  transition={{ duration: 0.5, ease: EASE, delay: i * 0.035 }}
                                   className="group relative aspect-square overflow-hidden bg-neutral-900"
                               >
                                   {t.image && (
@@ -221,13 +249,16 @@ export default function Music() {
                                           src={t.image}
                                           alt={`${t.album || t.title} by ${t.artists}`}
                                           loading="lazy"
+                                          {...fadeOnLoad}
                                           className={cn(
                                               "size-full object-cover grayscale duration-500 group-hover:scale-105 group-hover:grayscale-0 group-focus-visible:grayscale-0",
-                                              hovered !== null && hovered !== i && "opacity-50"
+                                              FADE_CLASS,
+                                              // brightness, not opacity, so it doesn't fight the load fade
+                                              hovered !== null && hovered !== i && "brightness-50"
                                           )}
                                       />
                                   )}
-                              </a>
+                              </motion.a>
                           ))
                         : Array.from({ length: 12 }, (_, i) => (
                               <div key={i} className="aspect-square animate-pulse bg-neutral-900" />
@@ -244,11 +275,11 @@ export default function Music() {
                         </>
                     )}
                 </div>
-            </section>
+            </Reveal>
 
-            {/* top tracks, last ~4 weeks */}
+            {/* top tracks, last 30 days */}
             {data && data.top.length > 0 && (
-                <section className="space-y-3">
+                <Reveal as="section" index={3} className="space-y-3">
                     <div className="flex items-baseline justify-between">
                         <h2 className="text-2xl font-semibold text-neutral-100">on repeat</h2>
                         <span className="text-sm text-neutral-600">last 30 days</span>
@@ -259,7 +290,12 @@ export default function Music() {
                             const dimmed = hoveredTop !== null && !active
                             const color = active ? (colors[t.url] ?? "#ea580c") : undefined
                             return (
-                                <li key={t.url}>
+                                <motion.li
+                                    key={t.url}
+                                    initial={{ opacity: 0, x: -6 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.5, ease: EASE, delay: 0.15 + i * 0.05 }}
+                                >
                                     <a
                                         href={t.url}
                                         target="_blank"
@@ -283,11 +319,13 @@ export default function Music() {
                                                 loading="lazy"
                                                 crossOrigin="anonymous"
                                                 onLoad={(e) => {
+                                                    fadeOnLoad.onLoad(e)
                                                     const c = coverColor(e.currentTarget)
                                                     if (c) setColors((prev) => ({ ...prev, [t.url]: c }))
                                                 }}
                                                 className={cn(
                                                     "size-10 rounded-sm object-cover duration-300",
+                                                    FADE_CLASS,
                                                     dimmed && "grayscale"
                                                 )}
                                             />
@@ -305,11 +343,11 @@ export default function Music() {
                                             {t.plays} plays
                                         </span>
                                     </a>
-                                </li>
+                                </motion.li>
                             )
                         })}
                     </ol>
-                </section>
+                </Reveal>
             )}
         </div>
     )
