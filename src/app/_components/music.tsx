@@ -256,10 +256,11 @@ export default function Music() {
                                               if (c) setColors((prev) => ({ ...prev, [t.url]: c }))
                                           }}
                                           className={cn(
-                                              "size-full object-cover grayscale duration-500 group-hover:scale-105 group-hover:grayscale-0 group-focus-visible:grayscale-0",
+                                              "size-full object-cover duration-500 group-hover:scale-105",
                                               FADE_CLASS,
+                                              // full color by default; hovering one greys out the rest.
                                               // brightness, not opacity, so it doesn't fight the load fade
-                                              hovered !== null && hovered !== i && "brightness-50"
+                                              hovered !== null && hovered !== i && "brightness-50 grayscale"
                                           )}
                                       />
                                   )}
