@@ -18,7 +18,9 @@ export default function PageLayout({ children, countOnVisit = true }: Props) {
                     {children}
                 </main>
             </div>
-            <Footer className="relative z-10" countOnVisit={countOnVisit} />
+            <div className="relative z-10 flex w-full justify-center px-4">
+                <Footer className="" countOnVisit={countOnVisit} />
+            </div>
         </div>
     )
 }

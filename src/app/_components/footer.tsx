@@ -17,10 +17,10 @@ export default function Footer({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, ease: EASE, delay: 0.5 }}
-            className={cn("mt-9 flex w-full max-w-screen-md flex-row gap-4 justify-between", className)}>
+            className={cn("mt-9 flex w-full max-w-screen-md flex-row justify-between gap-4 font-mono text-sm", className)}>
             <div>
                 <a
-                    className="select-none rounded-sm px-2 py-1 text-neutral-400 no-underline transition-colors duration-200 hover:bg-orange-300/5 hover:text-orange-600"
+                    className="select-none rounded-sm py-1 pr-4 text-neutral-500 no-underline transition-colors duration-200 hover:text-orange-600"
                     target="_blank"
                     href="mailto:dhanush@dhanushc.com"
                     rel="noreferrer"
@@ -28,7 +28,7 @@ export default function Footer({
                     email
                 </a>
                 <a
-                    className="select-none rounded-sm px-2 py-1 text-neutral-400 no-underline transition-colors duration-200 hover:bg-orange-300/5 hover:text-orange-600"
+                    className="select-none rounded-sm py-1 pr-4 text-neutral-500 no-underline transition-colors duration-200 hover:text-orange-600"
                     target="_blank"
                     href="https://www.github.com/ddundee"
                     rel="noreferrer"
@@ -36,7 +36,7 @@ export default function Footer({
                     github
                 </a>
                 <a
-                    className="select-none rounded-sm px-2 py-1 text-neutral-400 no-underline transition-colors duration-200 hover:bg-orange-300/5 hover:text-orange-600"
+                    className="select-none rounded-sm py-1 pr-4 text-neutral-500 no-underline transition-colors duration-200 hover:text-orange-600"
                     target="_blank"
                     href="https://www.linkedin.com/in/dhanush-chilakala/"
                     rel="noreferrer"

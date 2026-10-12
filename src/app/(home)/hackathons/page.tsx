@@ -6,10 +6,10 @@ export default function Hackathons() {
     return (
         <div className="space-y-9">
             <Reveal index={0} className="space-y-2">
-                <h1 className="min-h-7 w-full text-5xl font-bold text-neutral-100">
+                <h1 className="text-4xl leading-tight tracking-[-0.025em] text-neutral-100 sm:text-5xl">
                     hackathons
                 </h1>
-                <p className="text-neutral-400 text-lg">competitions i&apos;ve participated in</p>
+                <p className="text-neutral-500">competitions i&apos;ve participated in</p>
             </Reveal>
             <Reveal index={1}>
                 <HackathonList />

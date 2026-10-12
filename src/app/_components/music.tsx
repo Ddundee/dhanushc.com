@@ -38,7 +38,8 @@ function Equalizer() {
     )
 }
 
-// pulls the most prominent saturated color out of a cover, nudged light enough to read on the dark bg.
+// pulls the most prominent saturated color out of a cover. lightness is clamped per theme via
+// --cover-l-min/max (globals.css) so it reads on both the dark page and the light one.
 // needs the image loaded with crossOrigin="anonymous"; returns null if the canvas is tainted.
 function coverColor(img: HTMLImageElement) {
     const size = 32
@@ -93,8 +94,7 @@ function coverColor(img: HTMLImageElement) {
     }
     // near-greyscale covers stay grey instead of getting a random hue boosted
     const sat = s < 0.12 ? s : Math.max(s, 0.55)
-    const light = Math.min(Math.max(l, 0.62), 0.78)
-    return `hsl(${Math.round((h + 360) % 360)} ${Math.round(sat * 100)}% ${Math.round(light * 100)}%)`
+    return `hsl(${Math.round((h + 360) % 360)} ${Math.round(sat * 100)}% clamp(var(--cover-l-min), ${Math.round(l * 100)}%, var(--cover-l-max)))`
 }
 
 export default function Music() {
@@ -141,7 +141,7 @@ export default function Music() {
     const caption = data?.albums[hovered ?? 0]
 
     return (
-        <div className="space-y-12">
+        <div className="space-y-16">
             {/* now playing / last played */}
             <Reveal as="section" index={1} className="relative">
                 <AnimatePresence>
@@ -170,7 +170,7 @@ export default function Music() {
                                 alt={featured.album}
                                 {...fadeOnLoad}
                                 className={cn(
-                                    "size-24 rounded-sm object-cover shadow-lg shadow-black/40 duration-500 sm:size-28",
+                                    "size-24 rounded-sm object-cover shadow-lg shadow-black/40 duration-500 light:shadow-neutral-400/25 sm:size-28",
                                     FADE_CLASS
                                 )}
                             />
@@ -187,7 +187,7 @@ export default function Music() {
                         transition={{ duration: 0.45, ease: EASE }}
                         className="min-w-0 flex-1 space-y-1"
                     >
-                        <p className="flex items-center gap-2 text-neutral-500">
+                        <p className="flex items-center gap-2 font-mono text-sm text-neutral-500">
                             {np ? (
                                 <>
                                     <Equalizer />
@@ -205,7 +205,7 @@ export default function Music() {
                                     href={featured.url}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="block truncate text-lg text-neutral-100 underline decoration-neutral-600 underline-offset-4 transition-colors duration-200 hover:text-orange-600 hover:decoration-orange-600"
+                                    className="block truncate text-xl tracking-[-0.01em] text-neutral-100 underline decoration-neutral-700 underline-offset-4 transition-colors duration-200 hover:text-orange-600 hover:decoration-orange-600"
                                 >
                                     {featured.title}
                                 </a>
@@ -220,10 +220,10 @@ export default function Music() {
             </Reveal>
 
             {/* most played albums, last 30 days */}
-            <Reveal as="section" index={2} className="space-y-3">
+            <Reveal as="section" index={2} className="space-y-6">
                 <div className="flex items-baseline justify-between">
-                    <h2 className="text-2xl font-semibold text-neutral-100">recently played</h2>
-                    <span className="text-sm text-neutral-600">most played, last 30 days</span>
+                    <h2 className="font-mono text-sm text-neutral-500">recently played</h2>
+                    <span className="font-mono text-xs text-neutral-600">most played, last 30 days</span>
                 </div>
                 <div
                     className="grid grid-cols-3 gap-1.5 sm:grid-cols-4"
@@ -260,7 +260,7 @@ export default function Music() {
                                               FADE_CLASS,
                                               // full color by default; hovering one greys out the rest.
                                               // brightness, not opacity, so it doesn't fight the load fade
-                                              hovered !== null && hovered !== i && "brightness-50 grayscale"
+                                              hovered !== null && hovered !== i && "brightness-50 grayscale light:brightness-150 light:contrast-50"
                                           )}
                                       />
                                   )}
@@ -283,7 +283,7 @@ export default function Music() {
                                 <span className="text-neutral-500">{caption.artists}</span>
                             </p>
                             <span
-                                className="shrink-0 tabular-nums text-neutral-600 transition-colors duration-300"
+                                className="shrink-0 font-mono text-sm tabular-nums text-neutral-600 transition-colors duration-300"
                                 style={{ color: colors[caption.url] }}
                             >
                                 {caption.plays} plays
@@ -295,16 +295,16 @@ export default function Music() {
 
             {/* top tracks, last 30 days */}
             {data && data.top.length > 0 && (
-                <Reveal as="section" index={3} className="space-y-3">
+                <Reveal as="section" index={3} className="space-y-6">
                     <div className="flex items-baseline justify-between">
-                        <h2 className="text-2xl font-semibold text-neutral-100">on repeat</h2>
-                        <span className="text-sm text-neutral-600">last 30 days</span>
+                        <h2 className="font-mono text-sm text-neutral-500">on repeat</h2>
+                        <span className="font-mono text-xs text-neutral-600">last 30 days</span>
                     </div>
                     <ol className="space-y-3" onMouseLeave={() => setHoveredTop(null)}>
                         {data.top.map((t, i) => {
                             const active = hoveredTop === i
                             const dimmed = hoveredTop !== null && !active
-                            const color = active ? (colors[t.url] ?? "#ea580c") : undefined
+                            const color = active ? (colors[t.url] ?? "var(--color-orange-600)") : undefined
                             return (
                                 <motion.li
                                     key={t.url}
@@ -322,7 +322,7 @@ export default function Music() {
                                         className={cn("flex items-center gap-4 duration-300", dimmed && "opacity-40")}
                                     >
                                         <span
-                                            className="w-5 text-sm tabular-nums text-neutral-600 duration-300"
+                                            className="w-6 font-mono text-xs tabular-nums text-neutral-600 duration-300"
                                             style={{ color }}
                                         >
                                             {String(i + 1).padStart(2, "0")}
@@ -353,7 +353,7 @@ export default function Music() {
                                             <p className="truncate text-sm text-neutral-500">{t.artists}</p>
                                         </div>
                                         <span
-                                            className="shrink-0 text-sm tabular-nums text-neutral-600 duration-300"
+                                            className="shrink-0 font-mono text-xs tabular-nums text-neutral-600 duration-300"
                                             style={{ color }}
                                         >
                                             {t.plays} plays
