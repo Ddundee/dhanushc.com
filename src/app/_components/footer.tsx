@@ -17,7 +17,7 @@ export default function Footer({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, ease: EASE, delay: 0.5 }}
-            className={cn("mt-9 flex w-full max-w-screen-md flex-row justify-between gap-4 border-t border-neutral-800 pt-6 font-mono text-sm", className)}>
+            className={cn("mt-9 flex w-full max-w-screen-md flex-row justify-between gap-4 font-mono text-sm", className)}>
             <div>
                 <a
                     className="select-none rounded-sm py-1 pr-4 text-neutral-500 no-underline transition-colors duration-200 hover:text-orange-600"

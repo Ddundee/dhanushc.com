@@ -23,7 +23,7 @@ export default function Home() {
                     i&apos;m a {ageYear} y/o undergrad student at virginia tech majoring in cs + cmda (just a complicated name for data analytics). currently, i am helping organize vthacks as a software developer.
                 </p>
             </Reveal>
-            <Reveal as="section" index={1} className="space-y-6 border-t border-neutral-800 pt-6">
+            <Reveal as="section" index={1} className="space-y-6">
                 <h2 className="font-mono text-sm text-neutral-500">
                     hackathons
                 </h2>
@@ -38,7 +38,7 @@ export default function Home() {
                 </h2>
                 <ProjectList />
             </div> */}
-            <Reveal as="section" index={2} className="space-y-6 border-t border-neutral-800 pt-6">
+            <Reveal as="section" index={2} className="space-y-6">
                 <h2 className="font-mono text-sm text-neutral-500">
                     blog
                 </h2>

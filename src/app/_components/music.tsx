@@ -220,7 +220,7 @@ export default function Music() {
             </Reveal>
 
             {/* most played albums, last 30 days */}
-            <Reveal as="section" index={2} className="space-y-6 border-t border-neutral-800 pt-6">
+            <Reveal as="section" index={2} className="space-y-6">
                 <div className="flex items-baseline justify-between">
                     <h2 className="font-mono text-sm text-neutral-500">recently played</h2>
                     <span className="font-mono text-xs text-neutral-600">most played, last 30 days</span>
@@ -295,7 +295,7 @@ export default function Music() {
 
             {/* top tracks, last 30 days */}
             {data && data.top.length > 0 && (
-                <Reveal as="section" index={3} className="space-y-6 border-t border-neutral-800 pt-6">
+                <Reveal as="section" index={3} className="space-y-6">
                     <div className="flex items-baseline justify-between">
                         <h2 className="font-mono text-sm text-neutral-500">on repeat</h2>
                         <span className="font-mono text-xs text-neutral-600">last 30 days</span>
