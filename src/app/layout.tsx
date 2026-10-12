@@ -1,5 +1,5 @@
-import type { Metadata } from "next"
-import { Atkinson_Hyperlegible } from "next/font/google"
+import type { Metadata, Viewport } from "next"
+import { Geist, Geist_Mono } from "next/font/google"
 import "./globals.css"
 import { Toaster } from "@/components/ui/sonner"
 import RouterProgressBar from "@/components/router-progress-bar"
@@ -7,11 +7,25 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import MotionProvider from "@/context/motion-provider"
+import { ThemeProvider } from "next-themes"
 
-const atkinson = Atkinson_Hyperlegible({
-    weight: ["400"],
+const geist = Geist({
+    variable: "--font-geist-sans",
     subsets: ["latin", "latin-ext"],
 })
+
+const geistMono = Geist_Mono({
+    variable: "--font-geist-mono",
+    subsets: ["latin", "latin-ext"],
+})
+
+// tints the mobile browser chrome to match the page
+export const viewport: Viewport = {
+    themeColor: [
+        { media: "(prefers-color-scheme: light)", color: "#faf9f7" },
+        { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+    ],
+}
 
 export const metadata: Metadata = {
     metadataBase: new URL("https://www.dhanushc.com"),
@@ -67,19 +81,21 @@ export default function RootLayout({
     children: React.ReactNode
 }>) {
     return (
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning>
             <body
-                className={`${atkinson.className} bg-neutral-950 tracking-wide antialiased selection:bg-orange-600/30`}
+                className={`${geist.variable} ${geistMono.variable} bg-neutral-950 font-sans antialiased selection:bg-orange-600/30`}
             >
-                <TooltipProvider>
-                    <Toaster
-                        closeButton
-                        className="boder-orange-600 bg-orange-300/5 text-neutral-100 backdrop-blur-md"
-                    />
-                    <MotionProvider>
-                            {children}
-                    </MotionProvider>
-                </TooltipProvider>
+                <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+                    <TooltipProvider>
+                        <Toaster
+                            closeButton
+                            className="boder-orange-600 bg-orange-300/5 text-neutral-100 backdrop-blur-md"
+                        />
+                        <MotionProvider>
+                                {children}
+                        </MotionProvider>
+                    </TooltipProvider>
+                </ThemeProvider>
                 <Analytics />
                 <SpeedInsights />
             </body>

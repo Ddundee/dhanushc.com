@@ -11,8 +11,8 @@ export default function MusicPage() {
     return (
         <div className="space-y-9">
             <Reveal index={0} className="space-y-2">
-                <h1 className="min-h-7 w-full text-5xl font-bold text-neutral-100">music</h1>
-                <p className="text-lg text-neutral-400">what&apos;s in my ears</p>
+                <h1 className="text-4xl leading-tight tracking-[-0.025em] text-neutral-100 sm:text-5xl">music</h1>
+                <p className="text-neutral-500">what&apos;s in my ears</p>
             </Reveal>
             <Music />
         </div>

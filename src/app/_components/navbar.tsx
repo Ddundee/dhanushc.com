@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation"
 import React, { useEffect } from "react"
 import { motion } from 'motion/react'
 import { EASE } from "@/components/reveal"
+import ThemeToggle from "./theme-toggle"
 
 const pages = [
     {
@@ -61,11 +62,12 @@ export default function Navbar() {
             initial={{ opacity: 0, y: -6, filter: "blur(6px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 0.7, ease: EASE }}
-            className="w-full max-w-screen-md gap-3 flex">
+            className="flex w-full max-w-screen-md gap-3 font-mono text-xs sm:gap-4 sm:text-sm">
             {pages.map(page => {
                 if (pathname == page.url) return <p key={page.url} className="text-neutral-200">{page.title}</p>
-                else return <Link key={page.url} href={page.url} className="text-neutral-400 hover:text-neutral-200 transition-colors duration-200">{page.title}</Link>
+                else return <Link key={page.url} href={page.url} className="text-neutral-500 hover:text-neutral-200 transition-colors duration-200">{page.title}</Link>
             })}
+            <ThemeToggle />
         </motion.nav>
     )
 }

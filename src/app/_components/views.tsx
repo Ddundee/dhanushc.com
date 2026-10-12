@@ -45,7 +45,7 @@ export default function Views({ countOnVisit = true }: { countOnVisit?: boolean 
     return (
         <div>
             {streams !== -1 && (
-                <p className="text-neutral-400 text-sm"><NumberFlow value={streams} /> views</p>
+                <p className="py-1 text-neutral-500 tabular-nums"><NumberFlow value={streams} /> views</p>
             )}
         </div>
     )

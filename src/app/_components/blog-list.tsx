@@ -20,22 +20,23 @@ export default function BlogList() {
 
     const [page, setPage] = React.useState(1);
     return (
-        <div className="space-y-3">
+        <div className="space-y-6">
             {/* <p className='text-white'>{page}</p> */}
             {
                 BLOGS.map((blog, i) => (
-                    <div className="flex justify-between gap-2" key={blog.url}>
+                    // same index layout as the hackathon list
+                    <div className="grid gap-1 sm:grid-cols-[7rem_1fr] sm:gap-6" key={blog.url}>
+                        <span className="font-mono text-sm leading-7 text-neutral-500">{blog.published ? blog.date : "coming soon"}</span>
                         {blog.published ? <Link
                             href={blog.url}
-                            className={`text-lg font-medium text-neutral-200/70 hover:text-orange-600 transition-colors duration-200`}
+                            className="text-lg text-neutral-100 transition-colors duration-200 hover:text-orange-600"
                         >
                             {blog.title}
                         </Link> : <p
-                            className={`text-lg font-medium text-neutral-200/50`}
+                            className="text-lg text-neutral-500"
                         >
                             {blog.title}
                         </p>}
-                        <span className="text-md text-neutral-600">{blog.published ? blog.date : "coming soon"}</span>
                     </div>
                 ))
             }
